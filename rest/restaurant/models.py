@@ -47,9 +47,9 @@ class Food(models.Model):
     name = models.CharField(max_length=100, unique=True)
     type = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
-    # image = models.ImageField(upload_to='food_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='food_images/', null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    # category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
+    # category = models.ForeignKey('Category', on_delete=models.P   ROTECT, null=True)
     # user = models.ForeignKey(CustomUser,default=1, verbose_name='USer', on_delete=models.CASCADE)
     category = models.ForeignKey(
         Category,
@@ -83,7 +83,7 @@ class Book(models.Model):
 
 
 class Order(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, unique=True)
+    book = models.OneToOneField(Book, on_delete=models.CASCADE)
 
     # employee = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     employee = models.ForeignKey(
@@ -106,7 +106,7 @@ class OrderItem(models.Model):
     food = models.ForeignKey(
         Food,
         to_field='name',
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         db_column='food_name',
         null=True
 
@@ -119,7 +119,7 @@ class OrderItem(models.Model):
 
 class Payment(models.Model):
     payed_status = models.BooleanField(default=False)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, unique=True)
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
     total_sum = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     def calculate_total_sum(self):
