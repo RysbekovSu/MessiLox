@@ -4,7 +4,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-from .models import CustomUser, Table, Category, Book, OrderItem, Order, Payment, Food
+from .models import CustomUser, Table, Category, Book, OrderItem, Order, Payment, Food, OrderItemCook
 
 
 class FoodSerializer(serializers.ModelSerializer):
@@ -86,6 +86,10 @@ class OrderItemSerializer(serializers.ModelSerializer):
         model = OrderItem
         fields = "__all__"
 
+class OrderItemCookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItemCook
+        fields = "__all__"
 
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:

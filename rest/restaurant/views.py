@@ -9,9 +9,10 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import Food, CustomUser, Book, Category, Table, Order, OrderItem, Payment
+from .models import Food, CustomUser, Book, Category, Table, Order, OrderItem, Payment, OrderItemCook
 from .serializers import FoodSerializer, CustomUserSerializer, BookSerializer, CategorySerializer, TableSerializer, \
-    OrderSerializer, OrderItemSerializer, PaymentSerializer, RegisterSerializer, LoginSerializer
+    OrderSerializer, OrderItemSerializer, PaymentSerializer, RegisterSerializer, LoginSerializer, \
+    OrderItemCookSerializer
 
 
 class CategoryListView(generics.ListAPIView):
@@ -19,16 +20,17 @@ class CategoryListView(generics.ListAPIView):
     serializer_class = CategorySerializer
     permission_classes = (AllowAny,)
 
+
 class CategoryCreateView(generics.CreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = (AllowAny,)
 
+
 class CategoryAPIDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = (AllowAny,)
-
 
 
 class RegisterView(generics.CreateAPIView):
@@ -68,16 +70,17 @@ class LogoutView(generics.GenericAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class CustomUserListView(generics.ListAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     permission_classes = (AllowAny,)
 
+
 class CustomUserCreateView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     permission_classes = (AllowAny,)
+
 
 class CustomUserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = CustomUser.objects.all()
@@ -90,85 +93,120 @@ class TableListView(generics.ListAPIView):
     serializer_class = TableSerializer
     permission_classes = (AllowAny,)
 
+
 class TableCreateView(generics.CreateAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
     permission_classes = (AllowAny,)
+
 
 class TableDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
     permission_classes = (AllowAny,)
 
+
 class FoodListView(generics.ListAPIView):
     queryset = Food.objects.all()
     serializer_class = FoodSerializer
     permission_classes = (AllowAny,)
+
 
 class FoodCreateView(generics.CreateAPIView):
     queryset = Food.objects.all()
     serializer_class = FoodSerializer
     permission_classes = (AllowAny,)
 
+
 class FoodDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Food.objects.all()
     serializer_class = FoodSerializer
     permission_classes = (AllowAny,)
+
 
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = (AllowAny,)
 
+
 class BookCreateView(generics.CreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = (AllowAny,)
+
 
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = (AllowAny,)
 
+
 class OrderListView(generics.ListAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = (AllowAny,)
+
 
 class OrderCreateView(generics.CreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = (AllowAny,)
 
+
 class OrderDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = (AllowAny,)
+
 
 class OrderItemListView(generics.ListAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
     permission_classes = (AllowAny,)
 
+
 class OrderItemCreateView(generics.CreateAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
     permission_classes = (AllowAny,)
+
 
 class OrderItemDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
     permission_classes = (AllowAny,)
 
+
+class OrderItemCookListView(generics.ListAPIView):
+    queryset = OrderItemCook.objects.all()
+    serializer_class = OrderItemCookSerializer
+    permission_classes = (AllowAny,)
+
+
+class OrderItemCookCreateView(generics.CreateAPIView):
+    queryset = OrderItemCook.objects.all()
+    serializer_class = OrderItemCookSerializer
+    permission_classes = (AllowAny,)
+
+
+class OrderItemCookDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = OrderItemCook.objects.all()
+    serializer_class = OrderItemCookSerializer
+    permission_classes = (AllowAny,)
+
+
 class PaymentListView(generics.ListAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     permission_classes = (AllowAny,)
 
+
 class PaymentCreateView(generics.CreateAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
     permission_classes = (AllowAny,)
+
 
 class PaymentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Payment.objects.all()

@@ -4,7 +4,7 @@ from django.db import models
 # models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db.models import Sum, F
+from django.db.models import Sum, F, UniqueConstraint
 
 
 class CustomUser(AbstractUser):
@@ -65,6 +65,7 @@ class Food(models.Model):
 
 class Book(models.Model):
     time = models.DateTimeField()
+    id_done = models.BooleanField(default=False)
     # table = models.ForeignKey(Table, on_delete=models.CASCADE)
 
     table = models.ForeignKey(
@@ -78,6 +79,10 @@ class Book(models.Model):
     deposit = models.DecimalField(max_digits=10, decimal_places=2)
     customer_name = models.TextField(null=True, blank=True)
 
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['time', 'table'], name='unique_time_table')
+        ]
     def __str__(self):
         return f"Booking at {self.time} for table {self.table.name}"
 
@@ -112,10 +117,20 @@ class OrderItem(models.Model):
 
     )
     quantity = models.PositiveIntegerField()
-
+    def save(self, *args, **kwargs):
+        super(OrderItem, self).save(*args, **kwargs)
+        if not hasattr(self, 'orderitemcook'):
+            OrderItemCook.objects.create(orderItem=self)
     def __str__(self):
         return f"{self.quantity} x {self.food.name} for order {self.order.id}"
 
+
+class OrderItemCook(models.Model):
+    orderItem = models.OneToOneField(OrderItem, on_delete=models.CASCADE)
+    id_done = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.id} "
 
 class Payment(models.Model):
     payed_status = models.BooleanField(default=False)

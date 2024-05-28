@@ -57,9 +57,13 @@ urlpatterns = [
     path('api/v1/orders/create/', OrderCreateView.as_view(), name='order-create'),
     path('api/v1/orders/<int:pk>/', OrderDetailView.as_view(), name='order-detail'),
 
-    path('api/v1/orderitems/', OrderItemListView.as_view(), name='orderitem-list'),
-    path('api/v1/orderitems/create/', OrderItemCreateView.as_view(), name='orderitem-create'),
-    path('api/v1/orderitems/<int:pk>/', OrderItemDetailView.as_view(), name='orderitem-detail'),
+    path('api/v1/order_items/', OrderItemListView.as_view(), name='orderitem-list'),
+    path('api/v1/order_items/create/', OrderItemCreateView.as_view(), name='orderitem-create'),
+    path('api/v1/order_items/<int:pk>/', OrderItemDetailView.as_view(), name='orderitem-detail'),
+
+    path('api/v1/order_items_cook/', OrderItemCookListView.as_view(), name='orderitemCook-list'),
+    path('api/v1/order_items_cook/create/', OrderItemCookCreateView.as_view(), name='orderitemCook-create'),
+    path('api/v1/order_items_cook/<int:pk>/', OrderItemCookDetailView.as_view(), name='orderitemCook-detail'),
 
     path('api/v1/payments/', PaymentListView.as_view(), name='payment-list'),
     path('api/v1/payments/create/', PaymentCreateView.as_view(), name='payment-create'),
